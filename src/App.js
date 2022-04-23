@@ -20,13 +20,17 @@ function App() {
     e.preventDefault();
     setSearchTerm(searchTitle);
     searchMovies(searchTitle);
-    console.log(searchTitle);
 
     setSearchTerm("");
   };
 
+  const handleChange = () => {
+    searchMovies(searchTitle);
+    setSearchTerm("");
+  };
+
   useEffect(() => {
-    searchMovies('Spiderman');
+    searchMovies("Spiderman");
   }, []);
 
   return (
@@ -38,18 +42,11 @@ function App() {
           <input
             placeholder="Search for movies"
             value={searchTitle}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              console.log(e);
-            }}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </form>
 
-        <img
-          src={SearchIcon}
-          alt="search"
-          onClick={() => searchMovies(searchTitle)}
-        />
+        <img src={SearchIcon} alt="search" onClick={handleChange} />
       </div>
 
       {movies?.length > 0 ? (
